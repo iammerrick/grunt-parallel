@@ -36,7 +36,7 @@ grunt.initConfig({
 });
 ```
 
-One might target the task using `grunt parallel:assets`
+One might target the task using `grunt parallel:assets`. This would run compass, requirejs, and a custom shell script at the same time, each logging to your console when they are done.
 
 ## License
 Copyright (c) 2013 Merrick Christensen
