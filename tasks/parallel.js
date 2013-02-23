@@ -26,23 +26,7 @@ module.exports = function(grunt) {
     return deferred.promise;
   }
 
-  // Please see the grunt documentation for more information regarding task and
-  // helper creation: https://github.com/gruntjs/grunt/blob/master/docs/toc.md
-
-  // ==========================================================================
-  // TASKS
-  // ==========================================================================
-
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
-    var done = this.async();
-    var tasks = [];
-
-    this.data.forEach(function(task) {
-      tasks.push(spawn(task));
-    });
-
-    Q.all(tasks).then(function() {
-      done();
-    });
+    Q.all(this.data.map(spawn)).then(this.async());
   });
 };
