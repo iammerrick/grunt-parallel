@@ -14,7 +14,10 @@ module.exports = function(grunt) {
 
     grunt.util.spawn(task, function(error, result, code) {
       if (error || code !== 0) {
-        grunt.log.error(result, error.message);
+        grunt.log.error(result.stderr || result.stdout);
+        if (error.message) {
+          grunt.log(error.message);
+        }
         return deferred.reject();
       }
 
