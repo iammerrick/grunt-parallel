@@ -3,7 +3,7 @@
 Run commands and tasks in parallel.
 
 ## Getting Started
-Install this grunt plugin next to your project's [Gruntfile.js gruntfile][getting_started] with: `npm install grunt-parallel`
+Install this grunt plugin next to your project's [Gruntfile.js gruntfile][getting_started] with: `npm install grunt-parallel --save-dev`
 
 Then add this line to your project's `Gruntfile.js` gruntfile:
 
