@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       if (error || code !== 0) {
         grunt.log.error(result.stderr || result.stdout);
         if (error.message) {
-          grunt.log(error.message);
+          grunt.log.error(error.message);
         }
         return deferred.reject();
       }
