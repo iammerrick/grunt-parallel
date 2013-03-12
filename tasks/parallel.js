@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         return deferred.reject();
       }
 
-      grunt.log.write(result.toString('ascii'));
+      grunt.log.writeln(result.toString('ascii'));
 
       deferred.resolve();
     });
