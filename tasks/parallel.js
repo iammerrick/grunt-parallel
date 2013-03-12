@@ -14,10 +14,14 @@ module.exports = function(grunt) {
 
     grunt.util.spawn(task, function(error, result, code) {
       if (error || code !== 0) {
-        grunt.log.error(result.stderr || result.stdout);
+        var message = result.stderr || result.stdout;
+        
+        grunt.log.error(message);
+        
         if (error.message) {
           grunt.log.error(error.message);
         }
+        
         return deferred.reject();
       }
 
@@ -30,6 +34,8 @@ module.exports = function(grunt) {
   }
 
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
-    Q.all(this.data.map(spawn)).then(this.async());
+    var done = this.async();
+    
+    Q.all(this.data.map(spawn)).then(done, done.bind(this, false));
   });
 };

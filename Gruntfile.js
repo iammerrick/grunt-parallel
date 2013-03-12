@@ -10,6 +10,14 @@ module.exports = function(grunt) {
     while (new Date() - start < ms);
     grunt.log.write('Blocking finished.');
   });
+  
+  grunt.registerTask('fail', function() {
+    var ms = 500;
+    var start = +(new Date());
+    while (new Date() - start < ms);
+    grunt.log.error('Failure to be awesome!');
+    throw new Error('Broken!');
+  });
 
   // Project configuration.
   grunt.initConfig({
@@ -23,11 +31,20 @@ module.exports = function(grunt) {
       },{
         grunt: true,
         args: ['fast']
+      }],
+      fail: [{
+        grunt: true,
+        args: ['fast']
+      }, {
+        grunt: true,
+        args: ['fail']
       }]
     }
   });
 
   // Load local tasks.
   grunt.loadTasks('tasks');
+  
+  grunt.registerTask('default', ['parallel']);
 
 };
