@@ -30,7 +30,7 @@ grunt.initConfig({
       grunt: true,
       args: ['compass']
     },{
-      command: 'some-custom-shell-script.sh'
+      cmd: 'some-custom-shell-script.sh'
     }]
   }
 });
