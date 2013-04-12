@@ -33,6 +33,17 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
     lpad.stdout('    ');
     var done = this.async();
+    
+    // If the configuration specifies that the task is a grunt task. Make it so.
+    if (this.data.grunt === true) {
+      this.data.tasks = this.data.tasks.map(function(task) {
+        return {
+          args: task,
+          grunt: true
+        }
+      });
+    }
+
     Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false)).finally(function() {
       lpad.stdout();
     });
