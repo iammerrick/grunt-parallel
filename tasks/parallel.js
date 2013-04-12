@@ -8,6 +8,7 @@
 /*jshint es5:true*/
 module.exports = function(grunt) {
   var Q = require('q');
+  var lpad = require('lpad');
 
   function spawn(task) {
     var deferred = Q.defer();
@@ -15,17 +16,13 @@ module.exports = function(grunt) {
     grunt.util.spawn(task, function(error, result, code) {
       if (error || code !== 0) {
         var message = result.stderr || result.stdout;
-        
+
         grunt.log.error(message);
-        
-        if (error.message) {
-          grunt.log.error(error.message);
-        }
         
         return deferred.reject();
       }
 
-      grunt.log.writeln(result.toString('ascii'));
+      grunt.log.writeln('\n' + result);
 
       deferred.resolve();
     });
@@ -34,7 +31,10 @@ module.exports = function(grunt) {
   }
 
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
+    lpad.stdout('    ');
     var done = this.async();
-    Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
+    Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false)).finally(function() {
+      lpad.stdout();
+    });
   });
 };
