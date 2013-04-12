@@ -35,7 +35,6 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
     var done = this.async();
-    
-    Q.all(this.data.map(spawn)).then(done, done.bind(this, false));
+    Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
   });
 };

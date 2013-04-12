@@ -22,23 +22,32 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     parallel: {
-      assets: [{
-        grunt: true,
-        args: ['fast']
-      }, {
-        grunt: true,
-        args: ['block']
-      },{
-        grunt: true,
-        args: ['fast']
-      }],
-      fail: [{
-        grunt: true,
-        args: ['fast']
-      }, {
-        grunt: true,
-        args: ['fail']
-      }]
+      assets: {
+        tasks: [{
+          grunt: true,
+          args: ['fast']
+        }, {
+          grunt: true,
+          args: ['block']
+        },{
+          grunt: true,
+          args: ['fast']
+       }]
+      },
+      shell: {
+        tasks: [{
+          cmd: 'whoami'
+        }]
+      },
+      fail: {
+        tasks: [{
+          grunt: true,
+          args: ['fast']
+        }, {
+          grunt: true,
+          args: ['fail']
+        }]
+      }
     }
   });
 

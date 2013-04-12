@@ -23,15 +23,17 @@ grunt.loadNpmTasks('grunt-parallel');
 ```javascript
 grunt.initConfig({
   parallel: {
-    assets: [{
-      grunt: true,
-      args: ['requirejs']
-    }, {
-      grunt: true,
-      args: ['compass']
-    },{
-      cmd: 'some-custom-shell-script.sh'
-    }]
+    assets: {
+      tasks: [{
+        grunt: true,
+        args: ['requirejs']
+      }, {
+        grunt: true,
+        args: ['compass']
+      },{
+        cmd: 'some-custom-shell-script.sh'
+      }]
+    }
   }
 });
 ```
