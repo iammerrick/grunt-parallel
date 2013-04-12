@@ -16,6 +16,43 @@ grunt.loadNpmTasks('grunt-parallel');
 
 ## Documentation
 
+## The Configuration
+
+```javascript
+grunt.initConfig({
+    parallel: {
+      mix: {
+        tasks: [{
+          grunt: true,
+          args: ['fast']
+        }, {
+          grunt: true,
+          args: ['block']
+        }, {
+          cmd: 'pwd'
+        },{
+          grunt: true,
+          args: ['fast']
+       }]
+      },
+      shell: {
+        tasks: [{
+          cmd: 'whoami'
+        }]
+      },
+      grunt: {
+        grunt: true,
+        tasks: ['fast', 'block', 'fast']
+      }
+    }
+  });
+```
+
+## Example
+
+![Example](http://f.cl.ly/items/3e281L3X3h01293q3Z11/grunt-parallel.png)
+
+
 ### Settings
 
 * <tt>tasks</tt> - An array of commands to run, each deferred to: http://gruntjs.com/api/grunt.util#grunt.util.spawn
