@@ -1,6 +1,6 @@
 # grunt-parallel
 
-Run commands and tasks in parallel.
+Run commands and tasks in parallel to speed up your build.
 
 ## Getting Started
 Install this grunt plugin next to your project's [Gruntfile.js gruntfile][getting_started] with: `npm install grunt-parallel --save-dev`
