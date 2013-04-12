@@ -18,7 +18,7 @@ grunt.loadNpmTasks('grunt-parallel');
 
 ### Settings
 
-* <tt>commands</tt> - An array of commands to run, each deferred to: http://gruntjs.com/api/grunt.util#grunt.util.spawn
+* <tt>tasks</tt> - An array of commands to run, each deferred to: http://gruntjs.com/api/grunt.util#grunt.util.spawn
 
 ```javascript
 grunt.initConfig({
@@ -33,6 +33,21 @@ grunt.initConfig({
       },{
         cmd: 'some-custom-shell-script.sh'
       }]
+    }
+  }
+});
+```
+
+#### Only Using Grunt
+
+If you are only going to delegate to other grunt tasks you can simply put `grunt: true` in your tasks configuration and grunt-parallel will run them all using grunt.
+
+```javascript
+grunt.initConfig({
+  parallel: {
+    assets: {
+      grunt: true,
+      tasks: ['fast', 'block', 'fast']
     }
   }
 });
