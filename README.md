@@ -41,8 +41,16 @@ grunt.initConfig({
         }]
       },
       grunt: {
-        grunt: true,
+        options: {
+          grunt: true
+        },
         tasks: ['fast', 'block', 'fast']
+      },
+      stream: {
+        options: {
+          stream: true
+        },
+        tasks: [ { cmd: 'tail', args: ['-f', '/var/log/system.log'] }]
       }
     }
   });
@@ -74,6 +82,23 @@ grunt.initConfig({
   }
 });
 ```
+
+#### Streaming Log Output For Never Ending Tasks
+
+Sometimes tasks don't end and consequently you don't want to wait to receive their output till they are done, because you would never see their output. Think of watching files or tailing logs. For this case you can set the stream option to true, and all of the tasks output will be logged to your console, this is letting the sub process inherit your stdio.
+
+```javascript
+grunt.initConfig({
+  stream: {
+    options: {
+      stream: true
+    },
+    tasks: [{ cmd: 'tail', args: ['-f', '/var/log/system.log']}]
+  }
+});
+```
+
+Since tail runs till you send it a shutdown signal, you would like to stream the output to your stdio.
 
 #### Only Using Grunt
 

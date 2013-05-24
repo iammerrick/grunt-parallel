@@ -33,14 +33,26 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('parallel', 'Run sub-tasks in parallel.', function() {
     lpad.stdout('    ');
     var done = this.async();
+    var options = this.options({
+      grunt: false,
+      stream: false 
+    });
     
     // If the configuration specifies that the task is a grunt task. Make it so.
-    if (this.data.grunt === true) {
+    if (options.grunt === true) {
       this.data.tasks = this.data.tasks.map(function(task) {
         return {
           args: task,
           grunt: true
         }
+      });
+    }
+
+    if (options.stream === true) {
+      this.data.tasks = this.data.tasks.map(function(task) {
+        task.opts = task.opts || {};
+        task.opts.stdio = 'inherit';
+        return task;
       });
     }
 

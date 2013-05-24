@@ -42,8 +42,16 @@ module.exports = function(grunt) {
         }]
       },
       grunt: {
-        grunt: true,
+        options: {
+          grunt: true
+        },
         tasks: ['fast', 'block', 'fast']
+      },
+      stream: {
+        options: {
+          stream: true
+        },
+        tasks: [{ cmd: 'tail', args: ['-f', '/var/log/system.log']}]
       }
     }
   });
