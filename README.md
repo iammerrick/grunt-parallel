@@ -108,7 +108,9 @@ If you are only going to delegate to other grunt tasks you can simply put `grunt
 grunt.initConfig({
   parallel: {
     assets: {
-      grunt: true,
+      options: {
+        grunt: true
+      },
       tasks: ['fast', 'block', 'fast']
     }
   }
