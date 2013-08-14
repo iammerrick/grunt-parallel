@@ -42,7 +42,7 @@ module.exports = function(grunt) {
     if (options.grunt === true) {
       this.data.tasks = this.data.tasks.map(function(task) {
         return {
-          args: task,
+          args: [task],
           grunt: true
         }
       });
