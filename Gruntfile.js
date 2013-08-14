@@ -32,7 +32,6 @@ module.exports = function(grunt) {
         }, {
           cmd: 'pwd'
         },{
-          grunt: true,
           args: ['fast']
        }]
       },

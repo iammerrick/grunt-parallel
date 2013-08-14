@@ -51,6 +51,17 @@ module.exports = function(grunt) {
         }
       });
     }
+    
+    // Default to grunt it a task isn't specified 
+    this.data.tasks = this.data.tasks.map(function(task) {
+
+      if ( ! task.cmd ) {
+        task.grunt = true;
+      }
+
+      return task;
+
+    });
 
     // Pass verbose flag to spawned tasks
     if (grunt.option('verbose')) {
@@ -68,6 +79,7 @@ module.exports = function(grunt) {
         return task;
       });
     }
+
 
     Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
   });
