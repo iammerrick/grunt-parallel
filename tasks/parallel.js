@@ -48,6 +48,15 @@ module.exports = function(grunt) {
       });
     }
 
+    // Pass verbose flag to spawned tasks
+    if (grunt.option('verbose')) {
+      this.data.tasks.forEach(function(task) {
+        if (task.grunt) {
+          task.args.push('--verbose');
+        }
+      });
+    }
+
     if (options.stream === true) {
       this.data.tasks = this.data.tasks.map(function(task) {
         task.opts = task.opts || {};
