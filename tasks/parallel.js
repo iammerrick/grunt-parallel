@@ -51,16 +51,22 @@ module.exports = function(grunt) {
         }
       });
     }
-    
-    // Default to grunt it a task isn't specified 
+
+    // Normalize tasks config.
     this.data.tasks = this.data.tasks.map(function(task) {
 
+      // Default to grunt it a command isn't specified
       if ( ! task.cmd ) {
         task.grunt = true;
       }
 
-      return task;
+      // Pipe to the parent stdout when streaming.
+      if ( task.stream || ( task.stream === undefined && options.stream ) ) {
+        task.opts = task.opts || {};
+        task.opts.stdio = 'inherit';
+      }
 
+      return task;
     });
 
     // Pass verbose flag to spawned tasks
@@ -71,15 +77,6 @@ module.exports = function(grunt) {
         }
       });
     }
-
-    if (options.stream === true) {
-      this.data.tasks = this.data.tasks.map(function(task) {
-        task.opts = task.opts || {};
-        task.opts.stdio = 'inherit';
-        return task;
-      });
-    }
-
 
     Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
   });
