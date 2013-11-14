@@ -72,9 +72,11 @@ module.exports = function(grunt) {
     // Allow any flags to be passed to spawned tasks
     // This includes the verbose flag as well as any custom task flags
     this.data.tasks.forEach(function ( task ) {
-      grunt.option.flags().forEach(function ( flag ) {
-        task.args.push( flag );
-      });
+      if ( task.grunt ) {
+        grunt.option.flags().forEach(function ( flag ) {
+          task.args.push( flag );
+        });
+      }
     });
 
     Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
