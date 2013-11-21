@@ -41,6 +41,7 @@ module.exports = function(grunt) {
       grunt: false,
       stream: false
     });
+    var flags = grunt.flags();
 
     // If the configuration specifies that the task is a grunt task. Make it so.
     if (options.grunt === true) {
@@ -73,7 +74,7 @@ module.exports = function(grunt) {
     // This includes the verbose flag as well as any custom task flags
     this.data.tasks.forEach(function ( task ) {
       if ( task.grunt ) {
-        grunt.option.flags().forEach(function ( flag ) {
+        flags.forEach(function ( flag ) {
           task.args.push( flag );
         });
       }
