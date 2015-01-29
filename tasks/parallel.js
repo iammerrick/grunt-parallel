@@ -41,7 +41,7 @@ module.exports = function(grunt) {
       grunt: false,
       stream: false
     });
-    var flags = grunt.flags();
+    var flags = grunt.option.flags();
 
     // If the configuration specifies that the task is a grunt task. Make it so.
     if (options.grunt === true) {
