@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 
         grunt.log.error(message);
         lpad.stdout();
-        
+
         return deferred.reject();
       }
 
@@ -39,9 +39,10 @@ module.exports = function(grunt) {
     var done = this.async();
     var options = this.options({
       grunt: false,
-      stream: false 
+      stream: false
     });
-    
+    var flags = grunt.flags();
+
     // If the configuration specifies that the task is a grunt task. Make it so.
     if (options.grunt === true) {
       this.data.tasks = this.data.tasks.map(function(task) {
@@ -69,14 +70,15 @@ module.exports = function(grunt) {
       return task;
     });
 
-    // Pass verbose flag to spawned tasks
-    if (grunt.option('verbose')) {
-      this.data.tasks.forEach(function(task) {
-        if (task.grunt) {
-          task.args.push('--verbose');
-        }
-      });
-    }
+    // Allow any flags to be passed to spawned tasks
+    // This includes the verbose flag as well as any custom task flags
+    this.data.tasks.forEach(function ( task ) {
+      if ( task.grunt ) {
+        flags.forEach(function ( flag ) {
+          task.args.push( flag );
+        });
+      }
+    });
 
     Q.all(this.data.tasks.map(spawn)).then(done, done.bind(this, false));
   });
