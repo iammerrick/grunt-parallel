@@ -1,7 +1,7 @@
 {
   "name": "grunt-parallel",
   "description": "Run tasks or commands in child processes.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "homepage": "https://github.com/iammerrick/grunt-parallel",
   "author": {
     "name": "Merrick Christensen",
