@@ -1,3 +1,9 @@
+v0.5.0
+	date: 2016-06-02
+	changes:
+		- compatibility with grunt v1.0
+		- remove unused grunt dependency from `dependencies` (only keep in `devDependencies`)
+
 v0.4.1
 	date: 2014-01-29
 	changes:
